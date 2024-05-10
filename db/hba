@@ -1,0 +1,28 @@
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+#Database administrative login by Unix domain socket
+local	all		postgres				md5
+local	all		vemn_server				md5
+local	all		vemn_script				md5
+local	all		vemn_notification			md5
+local	all		admin_DGuskin				md5
+local	all		admin_DBurmatov				md5
+# "local" is for Unix domain socket connections only
+local   all             all                                     md5
+# IPv4 local connections:
+host    all             all			127.0.0.1/32            scram-sha-256
+host	all		vemn_server		127.0.0.1/32		md5
+host    all             vemn_script		127.0.0.1/32            md5
+host    all             vemn_notification	127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all			::1/128                 scram-sha-256
+host    all             vemn_server             ::1/128			md5
+host    all             vemn_script             ::1/128			md5
+host    all             vemn_notification       ::1/128			md5
+# Allow replication connections from localhost, by a user with the
+# replication privilege.
+local   replication     all                                     trust
+host    replication     all             127.0.0.1/32            trust
+host    replication     all             ::1/128                 trust
+
+host all all all scram-sha-256

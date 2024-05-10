@@ -1,0 +1,814 @@
+--
+-- PostgreSQL database cluster dump
+--
+
+-- Started on 2024-05-10 22:07:51 MSK
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE admin;
+ALTER ROLE admin WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:Ps5K6ZatIvN97M7XM0d4BA==$6COx0Pisg2s/aXRTpPboyn7r+u2LxtWiRijRHp42T0s=:4cM4dQ9ufwP8kGIJ8v9vrkxnx99qgrZEUOowcxj3+YA=';
+CREATE ROLE "admin_DBurmatov";
+ALTER ROLE "admin_DBurmatov" WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:ndTDgSPUylSjKL+ZUTSdbw==$kHXXEZbnkZdG/9xdL5guXlbF4RY759i8xLP1lTJJgQo=:BStjoDg4zhdFvCc77+EUNkupV1uT9xoig6Wm3shPSJY=';
+CREATE ROLE "admin_DGuskin";
+ALTER ROLE "admin_DGuskin" WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:Cc96ieHPas9ZOL5fg44Dsw==$/Vlq7qBIyHuhNFHMUD28RW6xVCD3j0eQYTzEbIjUH24=:0S5OYEiwBYocK6duhl/ifa3BQyD1QijLD3shO/5ws3Q=';
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:HPE/O2zAbzIRzwvef9DXzQ==$vL2aoZOBwhRbslrEpHxfCMTaXG0pkGd/h6QyL0iz3Uc=:RXU4EvimJt8bdO6yvqva2pwIWQvbVVzvmo//6Zf7nRo=';
+CREATE ROLE "vemn-notification";
+ALTER ROLE "vemn-notification" WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:uxImvU4ELFxvLXYPfxq8/w==$y7XyqxKBAtF0w6PI62NlVUjupKYZhGFFsG5dYERMtwE=:POyQcx9BZ/oKW9reFIe/uaQnUe/AG0INRGE7CaNsJsk=';
+CREATE ROLE "vemn-script";
+ALTER ROLE "vemn-script" WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:VgtthP6C7XSr5hxGJPipJg==$+29sm7ijW/WwJ7VeG33u2pghQJK+5s+29f2GcxC8+sI=:KZSu2ta7mCVhkfrt1ZxpDowFSnNTf7rVtJifDH8/e1E=';
+CREATE ROLE "vemn-server";
+ALTER ROLE "vemn-server" WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:Nu/xX2rWoc9EN8V51ff0+g==$XBLvnu3NteV+CablfMwsWzEGhTGGX7UTaRjTR2QVK04=:FSFhZSpfWx0RPos8xo0wXMexuQp2sFLV55CZfsRUiHQ=';
+
+
+--
+-- Role memberships
+--
+
+GRANT admin TO "admin_DBurmatov" GRANTED BY postgres;
+GRANT admin TO "admin_DGuskin" GRANTED BY postgres;
+
+
+
+
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
+
+\connect template1
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.9 (Debian 14.9-1.pgdg110+1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+-- Started on 2024-05-10 22:07:51 MSK
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+-- Completed on 2024-05-10 22:07:51 MSK
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "postgres" dump
+--
+
+\connect postgres
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.9 (Debian 14.9-1.pgdg110+1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+-- Started on 2024-05-10 22:07:51 MSK
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+-- Completed on 2024-05-10 22:07:51 MSK
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "vemn" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.9 (Debian 14.9-1.pgdg110+1)
+-- Dumped by pg_dump version 14.11 (Ubuntu 14.11-0ubuntu0.22.04.1)
+
+-- Started on 2024-05-10 22:07:51 MSK
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3382 (class 1262 OID 16390)
+-- Name: vemn; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE vemn WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.utf8';
+
+
+ALTER DATABASE vemn OWNER TO postgres;
+
+\connect vemn
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 7 (class 2615 OID 16391)
+-- Name: vemn; Type: SCHEMA; Schema: -; Owner: admin
+--
+
+CREATE SCHEMA vemn;
+
+
+ALTER SCHEMA vemn OWNER TO admin;
+
+--
+-- TOC entry 2 (class 3079 OID 16392)
+-- Name: adminpack; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 3384 (class 0 OID 0)
+-- Dependencies: 2
+-- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 211 (class 1259 OID 16402)
+-- Name: owners; Type: TABLE; Schema: vemn; Owner: admin
+--
+
+CREATE TABLE vemn.owners (
+    id integer NOT NULL,
+    nameowner character varying(150) NOT NULL,
+    shortname character varying(15) NOT NULL
+);
+
+
+ALTER TABLE vemn.owners OWNER TO admin;
+
+--
+-- TOC entry 212 (class 1259 OID 16405)
+-- Name: owners_id_seq; Type: SEQUENCE; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE vemn.owners ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME vemn.owners_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 213 (class 1259 OID 16406)
+-- Name: resource; Type: TABLE; Schema: vemn; Owner: admin
+--
+
+CREATE TABLE vemn.resource (
+    idurl integer NOT NULL,
+    ipfirst character varying(25) NOT NULL,
+    ipnow character varying(25) NOT NULL,
+    datefirst character varying(25) NOT NULL,
+    datenores character varying(25),
+    wafdate character varying(25)
+);
+
+
+ALTER TABLE vemn.resource OWNER TO admin;
+
+--
+-- TOC entry 214 (class 1259 OID 16409)
+-- Name: resource_idurl_seq; Type: SEQUENCE; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE vemn.resource ALTER COLUMN idurl ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME vemn.resource_idurl_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 215 (class 1259 OID 16410)
+-- Name: stat; Type: TABLE; Schema: vemn; Owner: admin
+--
+
+CREATE TABLE vemn.stat (
+    idstat integer NOT NULL,
+    datestat date NOT NULL,
+    allservers integer NOT NULL,
+    errservers integer NOT NULL,
+    workservers integer NOT NULL,
+    withwaf integer NOT NULL,
+    wafproc character varying(5) NOT NULL,
+    possible integer NOT NULL,
+    allcertificates integer NOT NULL,
+    okcertificates integer NOT NULL,
+    owners integer NOT NULL
+);
+
+
+ALTER TABLE vemn.stat OWNER TO admin;
+
+--
+-- TOC entry 216 (class 1259 OID 16413)
+-- Name: stat_idstat_seq; Type: SEQUENCE; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE vemn.stat ALTER COLUMN idstat ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME vemn.stat_idstat_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 217 (class 1259 OID 16414)
+-- Name: url; Type: TABLE; Schema: vemn; Owner: admin
+--
+
+CREATE TABLE vemn.url (
+    idurl integer NOT NULL,
+    nameurl character varying(100) NOT NULL,
+    ip character varying(25) NOT NULL,
+    err character varying(100) NOT NULL,
+    errbool boolean NOT NULL,
+    wafid integer NOT NULL,
+    wafbool boolean NOT NULL,
+    idusd integer,
+    idowner integer,
+    certbool boolean NOT NULL,
+    commonname character varying(50) NOT NULL,
+    issuer character varying(50) NOT NULL,
+    datecert character varying(25) NOT NULL
+);
+
+
+ALTER TABLE vemn.url OWNER TO admin;
+
+--
+-- TOC entry 218 (class 1259 OID 16417)
+-- Name: url_idurl_seq; Type: SEQUENCE; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE vemn.url ALTER COLUMN idurl ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME vemn.url_idurl_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 219 (class 1259 OID 16418)
+-- Name: usdata; Type: TABLE; Schema: vemn; Owner: admin
+--
+
+CREATE TABLE vemn.usdata (
+    idusd integer NOT NULL,
+    fio character varying(100) NOT NULL,
+    emailus character varying(50) NOT NULL,
+    phoneus character varying(25) NOT NULL,
+    tgus character varying(100) NOT NULL,
+    idowner integer
+);
+
+
+ALTER TABLE vemn.usdata OWNER TO admin;
+
+--
+-- TOC entry 220 (class 1259 OID 16421)
+-- Name: usdata_idusd_seq; Type: SEQUENCE; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE vemn.usdata ALTER COLUMN idusd ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME vemn.usdata_idusd_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 221 (class 1259 OID 16422)
+-- Name: users; Type: TABLE; Schema: vemn; Owner: admin
+--
+
+CREATE TABLE vemn.users (
+    idus integer NOT NULL,
+    emailus character varying(50) NOT NULL,
+    passwordus character varying(100) NOT NULL,
+    saltus character varying(50) NOT NULL,
+    access character varying(25)
+);
+
+
+ALTER TABLE vemn.users OWNER TO admin;
+
+--
+-- TOC entry 222 (class 1259 OID 16425)
+-- Name: users_idus_seq; Type: SEQUENCE; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE vemn.users ALTER COLUMN idus ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME vemn.users_idus_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 223 (class 1259 OID 16426)
+-- Name: vulnerability; Type: TABLE; Schema: vemn; Owner: admin
+--
+
+CREATE TABLE vemn.vulnerability (
+    idurl integer NOT NULL,
+    crits integer NOT NULL,
+    medium integer NOT NULL,
+    light integer NOT NULL,
+    inform integer NOT NULL
+);
+
+
+ALTER TABLE vemn.vulnerability OWNER TO admin;
+
+--
+-- TOC entry 224 (class 1259 OID 16429)
+-- Name: vulnerability_idurl_seq; Type: SEQUENCE; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE vemn.vulnerability ALTER COLUMN idurl ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME vemn.vulnerability_idurl_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 225 (class 1259 OID 16430)
+-- Name: waf; Type: TABLE; Schema: vemn; Owner: admin
+--
+
+CREATE TABLE vemn.waf (
+    id integer NOT NULL,
+    address character varying(16) NOT NULL
+);
+
+
+ALTER TABLE vemn.waf OWNER TO admin;
+
+--
+-- TOC entry 226 (class 1259 OID 16433)
+-- Name: waf_id_seq; Type: SEQUENCE; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE vemn.waf ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME vemn.waf_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 3361 (class 0 OID 16402)
+-- Dependencies: 211
+-- Data for Name: owners; Type: TABLE DATA; Schema: vemn; Owner: admin
+--
+
+COPY vemn.owners (id, nameowner, shortname) FROM stdin;
+1	vulnerability explorer & management	VEMN
+\.
+
+
+--
+-- TOC entry 3363 (class 0 OID 16406)
+-- Dependencies: 213
+-- Data for Name: resource; Type: TABLE DATA; Schema: vemn; Owner: admin
+--
+
+COPY vemn.resource (idurl, ipfirst, ipnow, datefirst, datenores, wafdate) FROM stdin;
+1	185.120.188.87	185.120.188.87	2023-11-13	\N	\N
+2	--------------------	--------------------	2023-11-13	2024-01-19	2023-11-13
+3	82.202.190.126	82.202.190.126	2023-11-13	\N	2024-01-19
+4	185.120.188.197	185.120.188.197	2023-11-13	\N	\N
+5	185.120.189.93	185.120.189.211	2023-11-13	\N	2024-05-02
+6	185.120.189.211	82.202.190.116	2023-11-13	\N	2024-02-29
+7	185.120.188.153	185.120.188.153	2023-11-13	\N	\N
+8	--------------------	--------------------	2023-01-19	2024-01-19	\N
+\.
+
+
+--
+-- TOC entry 3365 (class 0 OID 16410)
+-- Dependencies: 215
+-- Data for Name: stat; Type: TABLE DATA; Schema: vemn; Owner: admin
+--
+
+COPY vemn.stat (idstat, datestat, allservers, errservers, workservers, withwaf, wafproc, possible, allcertificates, okcertificates, owners) FROM stdin;
+1	2024-05-02	10	2	8	1	12.50	7	2	0	1
+\.
+
+
+--
+-- TOC entry 3367 (class 0 OID 16414)
+-- Dependencies: 217
+-- Data for Name: url; Type: TABLE DATA; Schema: vemn; Owner: admin
+--
+
+COPY vemn.url (idurl, nameurl, ip, err, errbool, wafid, wafbool, idusd, idowner, certbool, commonname, issuer, datecert) FROM stdin;
+1	103.mosreg.ru	185.120.188.87	Ok	t	0	f	1	1	f	--------------------	--------------------	2024-06-30
+2	adiios.mosreg.ru	--------------------	Error resolve and not curl	f	0	f	1	1	f	--------------------	--------------------	2024-06-30
+3	admin.vmeste.mosreg.ru	82.202.190.126	Ok	t	0	t	1	1	t	*.vmeste.mosreg.ru	AlphaSSL CA - SHA256 - G4	2024-06-30
+4	ais.msr.mosreg.ru	185.120.188.197	Ok	t	0	f	1	1	t	*.msr.mosreg.ru	AlphaSSL CA - SHA256 - G4	2024-06-30
+5	api.map.mz.mosreg.ru	185.120.189.211	Ok	t	2	t	1	1	t	api.map.mz.mosreg.ru	GlobalSign GCC R6 AlphaSSL CA 2023	2024-06-30
+6	api.parki.mosreg.ru	82.202.190.116	Ok	t	0	f	1	1	t	*.parki.mosreg.ru	GlobalSign GCC R6 AlphaSSL CA 2023	2024-06-30
+7	arm.rias.mosreg.ru	185.120.188.153	Ok	t	0	f	1	1	f	--------------------	--------------------	2024-06-30
+8	visplan.mosreg.ru	--------------------	Error resolve and not curl	f	0	f	1	1	f	--------------------	--------------------	2024-06-30
+\.
+
+
+--
+-- TOC entry 3369 (class 0 OID 16418)
+-- Dependencies: 219
+-- Data for Name: usdata; Type: TABLE DATA; Schema: vemn; Owner: admin
+--
+
+COPY vemn.usdata (idusd, fio, emailus, phoneus, tgus, idowner) FROM stdin;
+1	Гускин Дмитрий	va.pe4enka@gmail.com	89167548463	@va_pe4enka	1
+\.
+
+
+--
+-- TOC entry 3371 (class 0 OID 16422)
+-- Dependencies: 221
+-- Data for Name: users; Type: TABLE DATA; Schema: vemn; Owner: admin
+--
+
+COPY vemn.users (idus, emailus, passwordus, saltus, access) FROM stdin;
+1	va.pe4enka@gmail.com	63676e3f43564338234e5631345853503548666b331b9328c1f1fb2ad4351fee2d78cb0921ff9c1d4f	cgn?CVC8#NV14XSP5Hfk3	admin
+\.
+
+
+--
+-- TOC entry 3373 (class 0 OID 16426)
+-- Dependencies: 223
+-- Data for Name: vulnerability; Type: TABLE DATA; Schema: vemn; Owner: admin
+--
+
+COPY vemn.vulnerability (idurl, crits, medium, light, inform) FROM stdin;
+10	0	0	0	0
+9	0	0	0	0
+8	0	0	0	0
+7	0	0	0	0
+6	0	0	0	0
+5	0	0	0	0
+4	0	0	0	0
+3	0	0	0	0
+2	0	0	0	0
+1	0	0	0	0
+\.
+
+
+--
+-- TOC entry 3375 (class 0 OID 16430)
+-- Dependencies: 225
+-- Data for Name: waf; Type: TABLE DATA; Schema: vemn; Owner: admin
+--
+
+COPY vemn.waf (id, address) FROM stdin;
+2	185.120.189.211
+1	185.120.189.214
+0	Not WAF
+\.
+
+
+--
+-- TOC entry 3393 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: owners_id_seq; Type: SEQUENCE SET; Schema: vemn; Owner: admin
+--
+
+SELECT pg_catalog.setval('vemn.owners_id_seq', 1, false);
+
+
+--
+-- TOC entry 3394 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: resource_idurl_seq; Type: SEQUENCE SET; Schema: vemn; Owner: admin
+--
+
+SELECT pg_catalog.setval('vemn.resource_idurl_seq', 1, false);
+
+
+--
+-- TOC entry 3395 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: stat_idstat_seq; Type: SEQUENCE SET; Schema: vemn; Owner: admin
+--
+
+SELECT pg_catalog.setval('vemn.stat_idstat_seq', 1, false);
+
+
+--
+-- TOC entry 3396 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: url_idurl_seq; Type: SEQUENCE SET; Schema: vemn; Owner: admin
+--
+
+SELECT pg_catalog.setval('vemn.url_idurl_seq', 1, false);
+
+
+--
+-- TOC entry 3397 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: usdata_idusd_seq; Type: SEQUENCE SET; Schema: vemn; Owner: admin
+--
+
+SELECT pg_catalog.setval('vemn.usdata_idusd_seq', 1, false);
+
+
+--
+-- TOC entry 3398 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: users_idus_seq; Type: SEQUENCE SET; Schema: vemn; Owner: admin
+--
+
+SELECT pg_catalog.setval('vemn.users_idus_seq', 1, false);
+
+
+--
+-- TOC entry 3399 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: vulnerability_idurl_seq; Type: SEQUENCE SET; Schema: vemn; Owner: admin
+--
+
+SELECT pg_catalog.setval('vemn.vulnerability_idurl_seq', 1, false);
+
+
+--
+-- TOC entry 3400 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: waf_id_seq; Type: SEQUENCE SET; Schema: vemn; Owner: admin
+--
+
+SELECT pg_catalog.setval('vemn.waf_id_seq', 1, false);
+
+
+--
+-- TOC entry 3205 (class 2606 OID 16435)
+-- Name: owners owners_pkey; Type: CONSTRAINT; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE ONLY vemn.owners
+    ADD CONSTRAINT owners_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3207 (class 2606 OID 16437)
+-- Name: resource resource_pkey; Type: CONSTRAINT; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE ONLY vemn.resource
+    ADD CONSTRAINT resource_pkey PRIMARY KEY (idurl);
+
+
+--
+-- TOC entry 3209 (class 2606 OID 16439)
+-- Name: stat stat_pkey; Type: CONSTRAINT; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE ONLY vemn.stat
+    ADD CONSTRAINT stat_pkey PRIMARY KEY (idstat);
+
+
+--
+-- TOC entry 3211 (class 2606 OID 16441)
+-- Name: url url_pkey; Type: CONSTRAINT; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE ONLY vemn.url
+    ADD CONSTRAINT url_pkey PRIMARY KEY (idurl);
+
+
+--
+-- TOC entry 3213 (class 2606 OID 16443)
+-- Name: usdata usdata_pkey; Type: CONSTRAINT; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE ONLY vemn.usdata
+    ADD CONSTRAINT usdata_pkey PRIMARY KEY (idusd);
+
+
+--
+-- TOC entry 3215 (class 2606 OID 16445)
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE ONLY vemn.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (idus);
+
+
+--
+-- TOC entry 3217 (class 2606 OID 16447)
+-- Name: vulnerability vulnerability_pkey; Type: CONSTRAINT; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE ONLY vemn.vulnerability
+    ADD CONSTRAINT vulnerability_pkey PRIMARY KEY (idurl);
+
+
+--
+-- TOC entry 3219 (class 2606 OID 16449)
+-- Name: waf waf_pkey; Type: CONSTRAINT; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE ONLY vemn.waf
+    ADD CONSTRAINT waf_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3221 (class 2606 OID 16455)
+-- Name: url resource_fkey; Type: FK CONSTRAINT; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE ONLY vemn.url
+    ADD CONSTRAINT resource_fkey FOREIGN KEY (idurl) REFERENCES vemn.resource(idurl) NOT VALID;
+
+
+--
+-- TOC entry 3220 (class 2606 OID 16465)
+-- Name: resource vuln_fkey; Type: FK CONSTRAINT; Schema: vemn; Owner: admin
+--
+
+ALTER TABLE ONLY vemn.resource
+    ADD CONSTRAINT vuln_fkey FOREIGN KEY (idurl) REFERENCES vemn.vulnerability(idurl) NOT VALID;
+
+
+--
+-- TOC entry 3383 (class 0 OID 0)
+-- Dependencies: 7
+-- Name: SCHEMA vemn; Type: ACL; Schema: -; Owner: admin
+--
+
+GRANT USAGE ON SCHEMA vemn TO "vemn-server";
+
+
+--
+-- TOC entry 3385 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: TABLE owners; Type: ACL; Schema: vemn; Owner: admin
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE vemn.owners TO "vemn-server";
+
+
+--
+-- TOC entry 3386 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: TABLE resource; Type: ACL; Schema: vemn; Owner: admin
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE vemn.resource TO "vemn-server";
+
+
+--
+-- TOC entry 3387 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: TABLE stat; Type: ACL; Schema: vemn; Owner: admin
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE vemn.stat TO "vemn-server";
+
+
+--
+-- TOC entry 3388 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: TABLE url; Type: ACL; Schema: vemn; Owner: admin
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE vemn.url TO "vemn-server";
+
+
+--
+-- TOC entry 3389 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: TABLE usdata; Type: ACL; Schema: vemn; Owner: admin
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE vemn.usdata TO "vemn-server";
+
+
+--
+-- TOC entry 3390 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: TABLE users; Type: ACL; Schema: vemn; Owner: admin
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE vemn.users TO "vemn-server";
+
+
+--
+-- TOC entry 3391 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: TABLE vulnerability; Type: ACL; Schema: vemn; Owner: admin
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE vemn.vulnerability TO "vemn-server";
+
+
+--
+-- TOC entry 3392 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: TABLE waf; Type: ACL; Schema: vemn; Owner: admin
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE vemn.waf TO "vemn-server";
+
+
+-- Completed on 2024-05-10 22:07:51 MSK
+
+--
+-- PostgreSQL database dump complete
+--
+
+-- Completed on 2024-05-10 22:07:51 MSK
+
+--
+-- PostgreSQL database cluster dump complete
+--
+
