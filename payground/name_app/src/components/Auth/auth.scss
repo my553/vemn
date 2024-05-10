@@ -1,0 +1,156 @@
+.auth {
+  display          : flex;
+  flex-direction   : column;
+  background-color : #666666;
+;
+  box-shadow       : 3px 4px 50px 0px rgba(0, 0, 0, 0.20);
+  min-width        : 25vw;
+  min-height       : 23vw;
+  border-radius    : 1vw;
+  position         : absolute;
+  left             : 50%;
+  top              : 50%;
+  transform        : translate(-50%, -50%);
+  margin           : 0 auto;
+  align-items      : center;
+
+  &__container {
+    width : 27vw;
+    padding   : 4vw 2.5vw;
+  }
+
+  &__up {
+    display        : flex;
+    padding-bottom : 3vw;
+  }
+}
+
+.up {
+  &__logo {
+    padding-right : 1rem;
+
+    &-img {
+      width  : 5.5vw;
+      height : 3.5vw;
+    }
+  }
+
+  &__title {
+    font-size   : 1.095vw;
+    color       :#939393;
+    font-style  : normal;
+    font-weight : 500;
+
+    &-place {
+      color          : #adb0b4;
+      padding-bottom : 0.5vw;
+    }
+  }
+}
+
+.form {
+  display        : flex;
+  flex-direction : column;
+
+  &__input {
+    height        :5vh;
+    border-radius : 0.6vw;
+    border        : 0.05vw solid #d4d5d8;
+    padding-left  : .5vw;
+    font-size: 0.9vw;
+    max-height: 4vw;
+
+    &-login {
+      margin-bottom : 1vw;
+    }
+
+    &-password {
+      margin-bottom : 1.2vw;
+    }
+  }
+
+  &__button {
+    background-color : #2E6AC3;
+    border           : none;
+    border-radius    : .75vw;
+    color            : white;
+    padding          : 1vw 2vw;
+    font-size        : 0.9vw;
+    cursor           : pointer;
+  }
+}
+
+.error__message {
+  font-size     : 0.8vw;
+  color         : #ff4949;
+  margin-top    : 0;
+  margin-bottom : 0.7vw;
+}
+
+.invalidCred {
+  display : none;
+}
+
+
+@media screen and (max-width: 900px) {
+  .auth {
+    min-width: 40vw;
+    min-height: 50vw;
+    border-radius    : 1.7vw;
+
+    &__container {
+      width : 37vw;
+    }
+  }
+
+  .up {
+    &__logo {
+      padding-right : 1rem;
+
+      &-img {
+        width  : 8vw;
+        height : 5vw;
+      }
+    }
+
+    &__title {
+      font-size   : 1.65vw;
+
+      &-place {
+        padding-bottom : 1vw;
+      }
+    }
+  }
+
+  .form {
+    margin-top: 4vw;
+
+    &__input {
+      height        : 6vw;
+      border-radius : 1.5vw;
+      border        : 0.1vw solid #d4d5d8;
+      padding-left  : 1vw;
+      font-size: 1.8vw;
+      //max-height: 6vw;
+
+      &-login {
+        margin-bottom : 2vw;
+      }
+
+      &-password {
+        margin-bottom : 4vw;
+      }
+    }
+
+    &__button {
+      border-radius    : 1.6vw;
+      padding          : 2vw 4vw;
+      font-size        : 2vw;
+    }
+  }
+
+  .error__message {
+    font-size     : 1.2vw;
+    margin-bottom : 0.7vw;
+  }
+}

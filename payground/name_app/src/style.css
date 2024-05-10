@@ -1,0 +1,44 @@
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #F8F8F8;
+  font-family: Aleo, sans-serif;
+}
+@font-face {
+  font-family: Aleo;
+  src: local("Aleo"),
+  url("fonts/Aleo-Regular.ttf") format("truetype");
+}
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+li{
+  list-style-type: none;
+}
+
+ul{
+  padding: 0;
+}
+
+a{
+  text-decoration: none;
+}
+
+a.router-link-exact-active{
+  color: black;
+}
+
+p.router-link-exact-active{
+  color: black;
+}
+
+svg.router-link-exact-active{
+  stroke: black;
+}
+
+button:focus-visible{
+  outline: none !important;
+}
