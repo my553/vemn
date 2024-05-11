@@ -694,7 +694,7 @@ func (service *PgService) UserIdentity(c *gin.Context) {
 }
 
 func (service *PgService) GetStatistic(c *gin.Context) {
-	rows, err := helpers.Select("select nameurl,ip,err,errbool,waf.address,wafbool,certbool,commonname,issuer,datecert, usdata.fio, owners.shortname from url join waf on url.wafid=waf.id join usdata on url.idusd=usdata.idusd join owners on url.idowner=owners.id order by idurl;", nil, serverConf.DefaultConfig)
+	rows, err := helpers.Select("select idurl, nameurl,ip,err,errbool,waf.address,wafbool,certbool,commonname,issuer,datecert, usdata.fio, owners.shortname from url join waf on url.wafid=waf.id join usdata on url.idusd=usdata.idusd join owners on url.idowner=owners.id order by idurl;", nil, serverConf.DefaultConfig)
 	defer rows.Close()
 
 	if err != nil {
@@ -709,6 +709,7 @@ func (service *PgService) GetStatistic(c *gin.Context) {
 	for rows.Next() {
 		p := UrlTable{}
 		err := rows.Scan(
+			&p.ID,
 			&p.URL,
 			&p.IP,
 			&p.Err,
@@ -726,7 +727,36 @@ func (service *PgService) GetStatistic(c *gin.Context) {
 			fmt.Println(err)
 		}
 
-		stats = append(stats, AllStats{Resource{Name: p.URL.String, IP: p.IP.String, ErrMsg: p.Err.String, ErrStatus: p.ErrBool.Bool, WafStatus: p.WafBool.Bool, WafIP: p.WafAddress.String, CertStatus: p.CertBool.Bool, CommonName: p.CommonName.String, Issuer: p.Issuer.String, DateCert: p.EndDate.String, FIO: p.FIO.String, OwnerShortName: p.OwnerShortName.String}})
+		rows, err := helpers.Select("select crits,medium,light,inform,date from vulnerability where idurl=$1;", []any{p.ID.Int32}, serverConf.DefaultConfig)
+		defer rows.Close()
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"code": http.StatusInternalServerError,
+			})
+			return
+		}
+
+		vulns := Vulnerabilites{}
+
+		for rows.Next() {
+			v := VulnTable{}
+			err := rows.Scan(
+				&v.Crits,
+				&v.Medium,
+				&v.Light,
+				&v.Inform,
+				&v.Date,
+			)
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			vulns = Vulnerabilites{Crits: int(v.Crits.Int32), Medium: int(v.Medium.Int32), Light: int(v.Light.Int32), Inform: int(v.Inform.Int32), Date: v.Date.String}
+
+		}
+
+		stats = append(stats, AllStats{Resource{Name: p.URL.String, IP: p.IP.String, ErrMsg: p.Err.String, ErrStatus: p.ErrBool.Bool, WafStatus: p.WafBool.Bool, WafIP: p.WafAddress.String, CertStatus: p.CertBool.Bool, CommonName: p.CommonName.String, Issuer: p.Issuer.String, DateCert: p.EndDate.String, Vulnerabilites: vulns, FIO: p.FIO.String, OwnerShortName: p.OwnerShortName.String}})
 	}
 
 	data := struct {
