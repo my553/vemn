@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import auth from "./components/Auth/auth.vue";
 import * as storage from "./storage.js";
-import Main from "./components/Main/Main.vue";
+import Main from "./components/Main.vue";
 import RootLayout from "./components/RootLayout.vue";
 import NotFound from "./components/NotFound.vue";
 import Statistic from "./components/Statistic.vue";
 import Analytics from "./components/Analytics.vue";
+import Reports from "./components/Reports.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -20,7 +21,7 @@ const router = createRouter({
         { path: "statistics", component: Statistic },
         {
           path: "reports",
-          component: Main,
+          component: Reports,
         },
         { path: "analytics", component: Analytics },
         { path: "/:pathMatch(.*)*", component: NotFound },

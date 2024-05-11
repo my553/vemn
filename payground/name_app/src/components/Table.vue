@@ -13,6 +13,7 @@ import {
   onUpdated,
   reactive,
   ref,
+  watch,
   watchEffect,
 } from "vue";
 import Pagination from "./Pagination.vue";
@@ -34,7 +35,7 @@ export interface Statistics {
   };
 }
 
-const props = defineProps<{ data: Statistics[] }>();
+const props = defineProps<{ data: Statistics[]; rowsCount: number }>();
 
 const columnHelper = createColumnHelper<Statistics>();
 
@@ -69,91 +70,85 @@ const columns = [
   }),
 ];
 
-const rowsPerPage = 10;
-const currentPage = ref(1);
-
 const table = useVueTable({
   get data() {
     return props.data;
   },
   columns,
-  pageCount: Math.ceil(props.data.length / rowsPerPage),
   initialState: {
     pagination: {
-      pageIndex: currentPage.value,
-      pageSize: rowsPerPage,
+      pageSize: 5,
+      pageIndex: 0,
     },
   },
   getCoreRowModel: getCoreRowModel(),
   getPaginationRowModel: getPaginationRowModel(),
 });
 
-onUpdated(() => {});
+watch(
+  () => props.rowsCount,
+  () => {
+    table.setPageSize(props.rowsCount);
+  },
+);
 
 const handlePageClick = (page: number) => {
-  currentPage.value = page;
   table.setPageIndex(page - 1);
 };
 </script>
 
 <template>
-  <div class="w-full p-[22px] bg-white/10 rounded-xl flex items-end flex-col">
-    <table class="w-full flex flex-col gap-3">
-      <thead class="w-full">
-        <tr
-          class="grid grid-cols-7"
-          v-for="headerGroup in table.getHeaderGroups()"
-          :key="headerGroup.id"
+  <table class="w-full flex flex-col gap-3">
+    <thead class="w-full">
+      <tr
+        class="grid grid-cols-7"
+        v-for="headerGroup in table.getHeaderGroups()"
+        :key="headerGroup.id"
+      >
+        <th
+          class="w-full overflow-hidden"
+          v-for="header in headerGroup.headers"
+          :key="header.id"
+          :colSpan="header.colSpan"
         >
-          <th
-            class="w-full overflow-hidden"
-            v-for="header in headerGroup.headers"
-            :key="header.id"
-            :colSpan="header.colSpan"
+          <span
+            class="block text-start line-clamp-2 overflow-ellipsis text-main-blue"
           >
-            <span
-              class="block text-start line-clamp-2 overflow-ellipsis text-main-blue"
-            >
-              <FlexRender
-                v-if="!header.isPlaceholder"
-                :render="header.column.columnDef.header"
-                :props="header.getContext()"
-              />
-            </span>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="flex flex-col gap-4">
-        <tr
-          class="grid grid-cols-7 border-b-[1px] border-solid border-white pb-4"
-          v-for="row in table.getRowModel().rows"
-          :key="row.id"
-        >
-          <td
-            class="w-full"
-            v-for="cell in row.getVisibleCells()"
-            :key="cell.id"
+            <FlexRender
+              v-if="!header.isPlaceholder"
+              :render="header.column.columnDef.header"
+              :props="header.getContext()"
+            />
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="flex flex-col gap-4">
+      <tr
+        class="grid grid-cols-7 border-b-[1px] border-solid border-white pb-4"
+        v-for="row in table.getRowModel().rows"
+        :key="row.id"
+      >
+        <td class="w-full" v-for="cell in row.getVisibleCells()" :key="cell.id">
+          <span
+            class="block text-start line-clamp-2 overflow-ellipsis text-white"
           >
-            <span
-              class="block text-start line-clamp-2 overflow-ellipsis text-white"
-            >
-              <FlexRender
-                :render="cell.column.columnDef.cell"
-                :props="cell.getContext()"
-              />
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="mt-2.5">
-      <Pagination
-        :total-rows="data.length"
-        :rows-per-page="rowsPerPage"
-        :current-page="currentPage"
-        :on-page-click="handlePageClick"
-      />
-    </div>
+            <FlexRender
+              :render="cell.column.columnDef.cell"
+              :props="cell.getContext()"
+            />
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="mt-2.5">
+    <Pagination
+      :total-rows="data.length"
+      :rows-per-page="props.rowsCount"
+      :current-page="table.getState().pagination.pageIndex + 1"
+      :on-page-click="handlePageClick"
+    />
   </div>
 </template>
 

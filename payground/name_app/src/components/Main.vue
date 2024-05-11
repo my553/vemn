@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
-import * as storage from "../../storage.js";
-import * as httpClient from "../../httpClient.js";
-import SectionTitle from "../SectionTitle.vue";
+import * as storage from "../storage.js";
+import * as httpClient from "../httpClient.js";
+import SectionTitle from "./SectionTitle.vue";
 
 const accFIO = ref("");
 const generalStatistic = reactive({});
@@ -45,55 +45,11 @@ onMounted(() => {
   //берем данные для сертификатов
   httpClient.Get("/api/certificates").then((response) => {
     let resp = JSON.parse(response.data.body);
-    console.log(resp.current, resp.next);
     certs.value = {
       certs: [...resp.current, ...resp.next],
       num: resp.current.length + resp.next.length,
     };
   });
-
-  // создаем строки для списка ресурсов
-  // const rowsContainer = document.getElementById("rowsContainer");
-  // const dataArray = [
-  //   {
-  //     resource: "zni.pag.ase.com",
-  //     ip: "255.255.255.255",
-  //     resolve: "активен",
-  //     waf: "за WAF",
-  //     ssl: "*.soc.mosreg.ru",
-  //     date: "09.10.2023",
-  //   },
-  //   {
-  //     resource: "zni.pag.ase.com",
-  //     ip: "255.255.255.255",
-  //     resolve: "активен",
-  //     waf: "за WAF",
-  //     ssl: "*.soc.mosreg.ru",
-  //     date: "09.10.2023",
-  //   },
-  //   {
-  //     resource: "zni.pag.ase.com",
-  //     ip: "255.255.255.255",
-  //     resolve: "активен",
-  //     waf: "за WAF",
-  //     ssl: "*.soc.mosreg.ru",
-  //     date: "09.10.2023",
-  //   },
-  // ];
-  // dataArray.forEach((item) => {
-  //   const rowDiv = document.createElement("div");
-  //   rowDiv.classList.add("rows");
-  //   Object.keys(item).forEach((key) => {
-  //     const span = document.createElement("span");
-  //     span.classList.add(key);
-  //     span.textContent = item[key];
-  //     rowDiv.appendChild(span);
-  //   });
-  //   const lineSpan = document.createElement("span");
-  //   lineSpan.classList.add("line");
-  //   rowDiv.appendChild(lineSpan);
-  //   rowsContainer.appendChild(rowDiv);
-  // });
 });
 </script>
 
