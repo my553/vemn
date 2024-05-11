@@ -1,13 +1,13 @@
 version: "3.7"
 
 services:
-    db:
-      container_name: vemn-db
-      image: 
-      ports:
-        - "5432:5432"
-      environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
-      volumes:
-        - <path>/db/data:/var/lib/postgresql/data
+  db:
+    container_name: vemn-db
+    image: "postgres:14.9-bullseye"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - /Users/dmitrijprovotorov/Downloads/volume/db/data:/var/lib/postgresql/data

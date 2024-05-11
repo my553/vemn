@@ -2,6 +2,7 @@ package serverConf
 
 import (
 	"fmt"
+
 	"github.com/spf13/viper"
 )
 
@@ -19,7 +20,7 @@ func LoadConfig(path string) (config Config, err error) {
 
 	err = viper.ReadInConfig()
 	if err != nil {
-		fmt.Println("err in config.go: ", err.Error())
+		panic(fmt.Sprintln("error in config: $v", err))
 	}
 
 	err = viper.Unmarshal(&config)

@@ -6,8 +6,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/dgrijalva/jwt-go"
-	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -16,6 +14,9 @@ import (
 	"time"
 	"vemn/configs/serverConf"
 	"vemn/internal/server/postgresql/helpers"
+
+	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 )
 
 const (
@@ -24,6 +25,7 @@ const (
 
 func checkUserInDB(query string, args []any, password string) bool {
 	rows, err := helpers.Select(query, args, serverConf.DefaultConfig)
+
 	defer rows.Close()
 
 	us := UserAuth{}

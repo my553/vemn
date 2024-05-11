@@ -3,13 +3,14 @@ package resource
 import (
 	"database/sql"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	_ "github.com/lib/pq"
 	"net/http"
 	"strings"
 	"time"
 	"vemn/configs/serverConf"
 	"vemn/internal/server/postgresql/helpers"
+
+	"github.com/gin-gonic/gin"
+	_ "github.com/lib/pq"
 )
 
 func (service *PgService) Login(c *gin.Context) {
