@@ -137,6 +137,14 @@ type UrlTable struct {
 	OwnerShortName sql.NullString
 }
 
+type VulnTable struct {
+	Crits  sql.NullInt32
+	Medium sql.NullInt32
+	Light  sql.NullInt32
+	Inform sql.NullInt32
+	Date   sql.NullString
+}
+
 type Owner struct {
 	ID        sql.NullInt32  `json:"id"`
 	FullName  sql.NullString `json:"nameOwner"`
@@ -228,19 +236,28 @@ type AllStats struct {
 	Resource Resource `json:"resource"`
 }
 
+type Vulnerabilites struct {
+	Crits  int    `json:"crits"`  // 1 число
+	Medium int    `json:"medium"` // 2 число
+	Light  int    `json:"light"`  // 3 число
+	Inform int    `json:"inform"` //4 число
+	Date   string `json:"date"`   //дата последнего сканирования
+}
+
 type Resource struct {
-	Name           string `json:"nameUrl"`
-	IP             string `json:"ip"`
-	ErrMsg         string `json:"errMessage"`
-	ErrStatus      bool   `json:"errStatus"`
-	WafIP          string `json:"wafIP"`
-	WafStatus      bool   `json:"wafStatus"`
-	CertStatus     bool   `json:"certStatus"`
-	CommonName     string `json:"commonName"`
-	Issuer         string `json:"issuer"`
-	DateCert       string `json:"dateCert"`
-	FIO            string `json:"fio"`
-	OwnerShortName string `json:"ownerShortName"`
+	Name           string         `json:"nameUrl"` //столбик Ресурс
+	IP             string         `json:"ip"`      //столбик IP
+	ErrMsg         string         `json:"errMessage"`
+	ErrStatus      bool           `json:"errStatus"` //столбик активности ресурса
+	WafIP          string         `json:"wafIP"`
+	WafStatus      bool           `json:"wafStatus"` //столбик WAF
+	CertStatus     bool           `json:"certStatus"`
+	CommonName     string         `json:"commonName"`
+	Issuer         string         `json:"issuer"`
+	DateCert       string         `json:"dateCert"` //СтолбикSSL
+	FIO            string         `json:"fio"`
+	OwnerShortName string         `json:"ownerShortName"`
+	Vulnerabilites Vulnerabilites `json:"vulnerabilites"` //структура для столиков Уязвимости и Дата сканирования
 }
 
 type SQLChart struct {
