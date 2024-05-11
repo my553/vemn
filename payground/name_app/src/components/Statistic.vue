@@ -9,16 +9,31 @@ const data = ref<Statistics[]>([]);
 
 onMounted(() => {
   httpClient.Get("/api/statistic").then((response) => {
-    let resp = JSON.parse(response.data.body.stats) as any[];
-    console.log(resp);
-    // data.value = resp.map(({ resourse }) => ({
-    //   resource: resourse.commonName,
-    //   resolve: w,
-    //   ssl,
-    //   date,
-    //   waf,
-    //   ip,
-    // }));
+    let resp = JSON.parse(response.data.body) as { stats: any[] };
+
+    console.log(
+      resp.stats.map(({ resource }) => ({
+        resource: resource.nameUrl,
+        ip: resource.ip,
+        ssl: resource.dateCert,
+        date: resource.nameUrl,
+        waf: resource.wafStatus,
+        vulnerability: resource.vulnerabilites,
+        resolve: resource.errStatus,
+        lastScanDate: resource.vulnerabilites.date,
+      })),
+    );
+
+    data.value = resp.stats.map(({ resource }) => ({
+      resource: resource.nameUrl,
+      ip: resource.ip,
+      ssl: resource.dateCert,
+      date: resource.nameUrl,
+      waf: resource.wafStatus ? "За WAF" : "Не за WA",
+      vulnerability: resource.vulnerabilites,
+      resolve: resource.errStatus ? "Не активен" : "Активен",
+      lastScanDate: resource.vulnerabilites.date,
+    }));
   });
 });
 </script>

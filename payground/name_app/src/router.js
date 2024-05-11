@@ -5,6 +5,7 @@ import Main from "./components/Main/Main.vue";
 import RootLayout from "./components/RootLayout.vue";
 import NotFound from "./components/NotFound.vue";
 import Statistic from "./components/Statistic.vue";
+import Analytics from "./components/Analytics.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -21,7 +22,7 @@ const router = createRouter({
           path: "reports",
           component: Main,
         },
-        { path: "analytics", component: Main },
+        { path: "analytics", component: Analytics },
         { path: "/:pathMatch(.*)*", component: NotFound },
       ],
     },

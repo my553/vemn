@@ -6,8 +6,17 @@ import {
   createColumnHelper,
   getPaginationRowModel,
 } from "@tanstack/vue-table";
-import { computed, h, onMounted, reactive, ref, watchEffect } from "vue";
+import {
+  computed,
+  h,
+  onMounted,
+  onUpdated,
+  reactive,
+  ref,
+  watchEffect,
+} from "vue";
 import Pagination from "./Pagination.vue";
+import Vulnerability from "./Vulnerability.vue";
 
 export interface Statistics {
   resource: string;
@@ -15,7 +24,14 @@ export interface Statistics {
   resolve: string;
   waf: string;
   ssl: string;
-  date: string;
+  lastScanDate: string;
+  vulnerability: {
+    critical: number;
+    high: number;
+    medium: number;
+    light: number;
+    inform: number;
+  };
 }
 
 const props = defineProps<{ data: Statistics[] }>();
@@ -43,8 +59,12 @@ const columns = [
     header: "SSL",
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor("date", {
-    header: "Дата",
+  columnHelper.accessor("vulnerability", {
+    header: "Уязвимости",
+    cell: (info) => h(Vulnerability, { vulnerability: info.getValue() }),
+  }),
+  columnHelper.accessor("lastScanDate", {
+    header: "Дата сканирования",
     cell: (info) => info.getValue(),
   }),
 ];
@@ -53,7 +73,9 @@ const rowsPerPage = 10;
 const currentPage = ref(1);
 
 const table = useVueTable({
-  data: props.data,
+  get data() {
+    return props.data;
+  },
   columns,
   pageCount: Math.ceil(props.data.length / rowsPerPage),
   initialState: {
@@ -66,7 +88,7 @@ const table = useVueTable({
   getPaginationRowModel: getPaginationRowModel(),
 });
 
-onMounted(() => {});
+onUpdated(() => {});
 
 const handlePageClick = (page: number) => {
   currentPage.value = page;
@@ -79,7 +101,7 @@ const handlePageClick = (page: number) => {
     <table class="w-full flex flex-col gap-3">
       <thead class="w-full">
         <tr
-          class="grid grid-cols-6"
+          class="grid grid-cols-7"
           v-for="headerGroup in table.getHeaderGroups()"
           :key="headerGroup.id"
         >
@@ -103,7 +125,7 @@ const handlePageClick = (page: number) => {
       </thead>
       <tbody class="flex flex-col gap-4">
         <tr
-          class="grid grid-cols-6 border-b-[1px] border-solid border-white pb-4"
+          class="grid grid-cols-7 border-b-[1px] border-solid border-white pb-4"
           v-for="row in table.getRowModel().rows"
           :key="row.id"
         >
